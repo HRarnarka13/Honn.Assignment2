@@ -1,3 +1,5 @@
+import is.ru.honn.rufan.domain.Player;
+import is.ru.honn.rufan.service.PlayerService;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
