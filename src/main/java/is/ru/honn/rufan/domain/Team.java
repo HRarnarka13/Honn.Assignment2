@@ -1,74 +1,64 @@
 package is.ru.honn.rufan.domain;
 
 
-public class Team
-{
-  private int teamId;
-  private String location;
-  private String abbreviation;
-  private String displayName;
-  protected Venue venue;
+public class Team {
 
-  public Team() {
-  }
+    private int teamId;
+    private String location;
+    private String abbreviation;
+    private String displayName;
+    protected Venue venue;
 
-  public Team(int teamId, String location, String abbreviation, String displayName, Venue venue) {
-    this.teamId = teamId;
-    this.location = location;
-    this.abbreviation = abbreviation;
-    this.displayName = displayName;
-    this.venue = venue;
-  }
+    public Team() {
+    }
 
-  //region Getter setter
-  public int getTeamId()
-  {
-    return teamId;
-  }
+    public Team(int teamId, String location, String abbreviation, String displayName, Venue venue) {
+        this.teamId = teamId;
+        this.location = location;
+        this.abbreviation = abbreviation;
+        this.displayName = displayName;
+        this.venue = venue;
+    }
 
-  public void setTeamId(int teamId)
-  {
-    this.teamId = teamId;
-  }
+    //region Getter setter
+    public int getTeamId() {
+        return teamId;
+    }
 
-  public String getLocation()
-  {
-    return location;
-  }
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
 
-  public void setLocation(String location)
-  {
-    this.location = location;
-  }
+    public String getLocation() {
+        return location;
+    }
 
-  public String getAbbreviation()
-  {
-    return abbreviation;
-  }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-  public void setAbbreviation(String abbreviation)
-  {
-    this.abbreviation = abbreviation;
-  }
+    public String getAbbreviation() {
+        return abbreviation;
+    }
 
-  public String getDisplayName()
-  {
-    return displayName;
-  }
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
 
-  public void setDisplayName(String displayName)
-  {
-    this.displayName = displayName;
-  }
+    public String getDisplayName() {
+        return displayName;
+    }
 
-  public Venue getVenue()
-  {
-    return venue;
-  }
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
-  public void setVenue(Venue venue)
-  {
-    this.venue = venue;
-  }
-  //endregion
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
+    }
+    //endregion
 }
