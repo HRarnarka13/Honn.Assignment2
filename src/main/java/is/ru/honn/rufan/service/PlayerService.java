@@ -15,4 +15,8 @@ public class PlayerService {
     public void addPlayer(Player player1) {
 
     }
+
+    public Player Getplayer(int i) {
+        return null;
+    }
 }
