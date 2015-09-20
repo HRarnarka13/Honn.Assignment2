@@ -1,5 +1,9 @@
 package is.ru.honn.rufan.domain;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by arnarkari on 20/09/15.
  *
@@ -7,16 +11,20 @@ package is.ru.honn.rufan.domain;
  */
 public class Player {
 
-    private int playerId;
-    private String firstName;
-    private String lastName;
-    private int teamId;
+    protected int playerId;
+    protected String firstName;
+    protected String lastName;
+    protected int height;
+    protected int weight;
+    protected Date birthDate;
+    protected Country nationality;
+    protected int teamId;
+    protected List<Position> positions = new ArrayList<Position>();
 
     public Player() {
     }
 
-    public Player(int playerId, String firstName, String lastName, int teamId) {
-        this.playerId = playerId;
+    public Player(String firstName, String lastName, int teamId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.teamId = teamId;
@@ -52,5 +60,29 @@ public class Player {
 
     public int getPlayerId() {
         return playerId;
+    }
+
+    public void setNationality(Country nationality) {
+        this.nationality = nationality;
+    }
+
+    public Country getNationality() {
+        return nationality;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void addPosition(Position position) {
+
     }
 }

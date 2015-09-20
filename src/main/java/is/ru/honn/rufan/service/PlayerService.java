@@ -9,5 +9,7 @@ import is.ru.honn.rufan.domain.Player;
  */
 public interface PlayerService {
 
+    public Player Getplayer(int i);
 
+    int addPlayer(Player player1);
 }

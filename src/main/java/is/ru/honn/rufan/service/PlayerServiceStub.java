@@ -22,4 +22,8 @@ public class PlayerServiceStub implements PlayerService {
         }
         return null; // TODO: throw exception
     }
+
+    public int addPlayer(Player player1) {
+        return 0;
+    }
 }

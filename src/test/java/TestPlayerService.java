@@ -29,12 +29,10 @@ public class TestPlayerService extends TestCase {
     }
 
     @Test
-    public void testPlayer(){
+    public void AddPlayer_FirstNameRequired() {
         Player player1 = new Player();
-        Player player2 = new Player();
 
         service.addPlayer(player1);
-        service.addPlayer(player2);
 
         Player playerNew = service.Getplayer(1);
         assertSame(player1, playerNew);
