@@ -2,6 +2,8 @@ package is.ru.honn.rufan.service;
 
 import is.ru.honn.rufan.domain.Player;
 
+import java.util.List;
+
 /**
  * Created by arnarkari on 20/09/15.
  *
@@ -9,7 +11,8 @@ import is.ru.honn.rufan.domain.Player;
  */
 public interface PlayerService {
 
-    public Player Getplayer(int i);
-
-    int addPlayer(Player player1);
+    Player getPlayer(int playerId);
+    List<Player> getPlayers(int teamId);
+    List<Player> getPlayersByAbbreviation(String abbreviation);
+    int addPlayer(Player player) throws ServiceException;
 }

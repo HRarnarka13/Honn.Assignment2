@@ -14,23 +14,32 @@ public class PlayerServiceStub implements PlayerService {
 
     private List<Player> players = new ArrayList<Player>();
 
-    public Player Getplayer(int i) {
+
+    public List<Player> getPlayers(int teamId) {
+        return players;
+    }
+
+    public List<Player> getPlayersByAbbreviation(String abbreviation) {
+        return null;
+    }
+
+    public Player getPlayer(int playerId) {
         for (Player player : players) {
-            if (player.getPlayerId() == i) {
+            if (player.getPlayerId() == playerId) {
                 return player;
             }
         }
         return null; // TODO: throw exception
     }
 
-    public int addPlayer(Player newPlayer) throws IllegalArgumentException {
+    public int addPlayer(Player newPlayer) throws ServiceException {
 
         if (newPlayer.getFirstName() == null ||
                 newPlayer.getFirstName().equals("") ||
                 newPlayer.getLastName() == null ||
                 newPlayer.getLastName().equals("") ||
                 newPlayer.getTeamId() == 0) {
-            throw new IllegalArgumentException();
+            throw new ServiceException();
         }
 
         if (players.isEmpty()) {

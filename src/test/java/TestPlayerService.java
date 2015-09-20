@@ -2,6 +2,7 @@ import is.ru.honn.rufan.domain.Player;
 import is.ru.honn.rufan.domain.Team;
 import is.ru.honn.rufan.domain.Venue;
 import is.ru.honn.rufan.service.PlayerService;
+import is.ru.honn.rufan.service.ServiceException;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +31,11 @@ public class TestPlayerService extends TestCase {
 
     @Before
     public void setup() {
-
         // Create venue
         venue = new Venue();
         venue.setVenueId(1);
         venue.setName("Anfield");
         venue.setCity("Liverpool");
-
         // Create team
         team = new Team();
         team.setTeamId(1);
@@ -45,107 +44,69 @@ public class TestPlayerService extends TestCase {
     }
 
     //region Test add player required properties
-    @Test
-    public void AddPlayer_FirstNameRequired_FirstNameEmpty() {
-
+    @Test(expected = ServiceException.class)
+    public void AddPlayer_FirstNameRequired_FirstNameEmpty() throws ServiceException {
         // Arrange:
         Player player = new Player("", "Milner", team.getTeamId());
-
         // Act:
-        try {
-            playerService.addPlayer(player);
-        } catch (IllegalArgumentException e) {
-            // Assert:
-            assertSame(IllegalArgumentException.class, e.getClass());
-        }
+        playerService.addPlayer(player);
     }
-    @Test
-    public void AddPlayer_FirstNameRequired_FirstNameIsNULL() {
+
+    @Test(expected = ServiceException.class)
+    public void AddPlayer_FirstNameRequired_FirstNameIsNULL() throws ServiceException {
 
         // Arrange:
         Player player = new Player(null, "Milner", team.getTeamId());
 
         // Act:
-        try {
-            playerService.addPlayer(player);
-        } catch (IllegalArgumentException e) {
-            // Assert:
-            assertSame(IllegalArgumentException.class, e.getClass());
-        }
+        playerService.addPlayer(player);
     }
 
-    @Test
-     public void AddPlayer_LastNameRequired_LastNameIsEmpty() {
-
+    @Test(expected = ServiceException.class)
+    public void AddPlayer_LastNameRequired_LastNameIsEmpty() throws ServiceException {
         // Arrange:
         Player player = new Player("James", "", team.getTeamId());
-
         // Act:
-        try {
-            playerService.addPlayer(player);
-        } catch (IllegalArgumentException e) {
-            // Assert:
-            assertSame(IllegalArgumentException.class, e.getClass());
-        }
+        playerService.addPlayer(player);
     }
 
-    @Test
-    public void AddPlayer_LastNameRequired_LastNameIsNull() {
-
+    @Test(expected = ServiceException.class)
+    public void AddPlayer_LastNameRequired_LastNameIsNull() throws ServiceException {
         // Arrange:
         Player player = new Player("James", null, team.getTeamId());
-
         // Act:
-        try {
-            playerService.addPlayer(player);
-        } catch (IllegalArgumentException e) {
-            // Assert:
-            assertSame(IllegalArgumentException.class, e.getClass());
-        }
+        playerService.addPlayer(player);
     }
 
-    @Test
-    public void AddPlayer_TeamIdRequired() {
-
+    @Test(expected = ServiceException.class)
+    public void AddPlayer_TeamIdRequired() throws ServiceException {
         // Arrange:
         Player player = new Player("James", "Milner", 0);
-
         // Act:
-        try {
-            playerService.addPlayer(player);
-        } catch (IllegalArgumentException e) {
-            // Assert:
-            assertSame(IllegalArgumentException.class, e.getClass());
-        }
+        playerService.addPlayer(player);
     }
     //endregion
 
     // region Test add player that is ok
-    @Test
-    public void AddPlayer_AddingValidPlayer(){
-
+    public void AddPlayer_AddingValidPlayer() throws ServiceException {
         // Arrange:
         Player player1 = new Player("James", "Milner", team.getTeamId());
         Player player2 = new Player("Danny", "Ings", team.getTeamId());
-
         // Act :
         playerService.addPlayer(player1);
         playerService.addPlayer(player2);
-
         // Assert:
-        assertSame("Player1", player1, playerService.Getplayer(1));
-        assertSame("Player2", player2, playerService.Getplayer(2));
+        assertSame("Player1", player1, playerService.getPlayer(1));
+        assertSame("Player2", player2, playerService.getPlayer(2));
     }
     // endregion
 
     // region Test get player that dose not exist
-    @Test
-    public void GetPlayer_GetNonExistingPlayer() throws Exception {
-
+    public void GetPlayer_GetNonExistingPlayer() {
         // Arrange :
         int nonExistingPlayerId = 999;
         // Act :
-        Player player = playerService.Getplayer(nonExistingPlayerId);
+        Player player = playerService.getPlayer(nonExistingPlayerId);
         // Assert :
         assertNull(player);
     }
