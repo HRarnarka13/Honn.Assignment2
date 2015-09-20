@@ -5,5 +5,5 @@ package is.ru.honn.rufan.service;
  *
  * @author arnarkari
  */
-public class PlayServiceStub {
+public class PlayerServiceStub {
 }

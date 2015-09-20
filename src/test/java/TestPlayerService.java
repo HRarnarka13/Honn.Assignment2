@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 @ContextConfiguration("classpath:app-test-stub.xml")
 public class TestPlayerService extends TestCase {
     Logger log = Logger.getLogger(TestPlayerService.class.getName());
-
+c
     @Autowired
     private PlayerService service;
 
