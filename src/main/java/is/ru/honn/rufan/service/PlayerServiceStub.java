@@ -28,12 +28,17 @@ public class PlayerServiceStub implements PlayerService {
         if (newPlayer.getFirstName() == null ||
                 newPlayer.getFirstName().equals("") ||
                 newPlayer.getLastName() == null ||
-                newPlayer.getLastName().equals("")) {
+                newPlayer.getLastName().equals("") ||
+                newPlayer.getTeamId() == 0) {
             throw new IllegalArgumentException();
         }
 
-        newPlayer.setPlayerId(players.size());
+        if (players.isEmpty()) {
+            newPlayer.setPlayerId(1);
+        } else {
+            newPlayer.setPlayerId(players.size() + 1);
+        }
         players.add(newPlayer);
-        return players.size() - 1;
+        return players.size();
     }
 }
