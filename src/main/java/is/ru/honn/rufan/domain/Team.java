@@ -9,6 +9,18 @@ public class Team
   private String displayName;
   protected Venue venue;
 
+  public Team() {
+  }
+
+  public Team(int teamId, String location, String abbreviation, String displayName, Venue venue) {
+    this.teamId = teamId;
+    this.location = location;
+    this.abbreviation = abbreviation;
+    this.displayName = displayName;
+    this.venue = venue;
+  }
+
+  //region Getter setter
   public int getTeamId()
   {
     return teamId;
@@ -49,7 +61,6 @@ public class Team
     this.displayName = displayName;
   }
 
-
   public Venue getVenue()
   {
     return venue;
@@ -59,4 +70,5 @@ public class Team
   {
     this.venue = venue;
   }
+  //endregion
 }

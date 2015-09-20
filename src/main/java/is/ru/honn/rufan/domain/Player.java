@@ -30,6 +30,8 @@ public class Player {
         this.teamId = teamId;
     }
 
+    //region Getters and setters
+
     public String getFirstName() {
         return firstName;
     }
@@ -85,4 +87,5 @@ public class Player {
     public void addPosition(Position position) {
 
     }
+    //endregion
 }

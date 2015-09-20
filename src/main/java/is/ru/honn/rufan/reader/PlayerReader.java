@@ -7,10 +7,9 @@ import org.json.simple.JSONValue;
 
 import java.util.*;
 
-public class PlayerReader
-{
-    public Object parse(String content)
-    {
+public class PlayerReader {
+
+    public Object parse(String content) {
         // Root object
         JSONObject jsonObject = (JSONObject) JSONValue.parse(content);
 
@@ -27,8 +26,7 @@ public class PlayerReader
         JSONObject jPlayer;
         List<Player> players = new ArrayList<Player>();
         Player player;
-        for (int i = 0; i < jPlayers.size(); i++)
-        {
+        for (int i = 0; i < jPlayers.size(); i++) {
             player = new Player();
             jPlayer = (JSONObject) jPlayers.get(i);
             player.setPlayerId(getInt(jPlayer, "playerId"));
@@ -55,8 +53,7 @@ public class PlayerReader
             Position position;
             JSONArray jPositions = (JSONArray) jPlayer.get("positions");
             Iterator it = jPositions.iterator();
-            while(it.hasNext())
-            {
+            while(it.hasNext()) {
                 jTmp = (JSONObject)it.next();
                 position = new Position(getInt(jTmp, "positionId"),
                         (String)jTmp.get("name"),
@@ -66,7 +63,7 @@ public class PlayerReader
             }
 
             players.add(player);
-            readHandler.read(i, player);
+            // readHandler.read(i, player);
         }
 
         return players;
@@ -83,13 +80,9 @@ public class PlayerReader
         return value.intValue();
     }
 
-    protected Date newDate(int year, int month, int date)
-    {
+    protected Date newDate(int year, int month, int date) {
         Calendar cal = new GregorianCalendar();
         cal.set(year, month, date);
         return cal.getTime();
     }
-
-
-
 }
