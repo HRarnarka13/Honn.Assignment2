@@ -53,11 +53,11 @@ public class PlayerReader {
             Position position;
             JSONArray jPositions = (JSONArray) jPlayer.get("positions");
             Iterator it = jPositions.iterator();
-            while(it.hasNext()) {
-                jTmp = (JSONObject)it.next();
+            while (it.hasNext()) {
+                jTmp = (JSONObject) it.next();
                 position = new Position(getInt(jTmp, "positionId"),
-                        (String)jTmp.get("name"),
-                        (String)jTmp.get("abbreviation"),
+                        (String) jTmp.get("name"),
+                        (String) jTmp.get("abbreviation"),
                         getInt(jTmp, "sequence"));
                 player.addPosition(position);
             }
@@ -73,8 +73,8 @@ public class PlayerReader {
         if (jParent == null) {
             return 0;
         }
-        Long value = (Long)jParent.get(name);
-        if(value == null) {
+        Long value = (Long) jParent.get(name);
+        if (value == null) {
             return 0;
         }
         return value.intValue();

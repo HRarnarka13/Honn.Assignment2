@@ -19,15 +19,43 @@ public class TeamServiceStub implements TeamService {
     private League getLeague(int leagueId) {
         for (League league : leagues) {
             if (league.getLeagueId() == leagueId) {
-               return league;
+                return league;
             }
         }
         return null; // TODO : throw not found error
     }
 
+    private League createLeague(int leagueId) {
+        Season season = new Season();
+        season.setIsActive(false);
+        season.setName("Temp");
+        season.setSeason(1);
+
+        League league = new League();
+        league.setLeagueId(leagueId);
+        league.setDisplayName("Temp");
+        league.setAbbreviation("T");
+        league.setName("Temp");
+        league.setSeason(season);
+        leagues.add(league);
+        return league;
+    }
+
 
     public int addTeam(int leagueId, Team team) throws ServiceException {
+        // Validate team
+        if (team.getTeamId() == 0 ||
+                team.getAbbreviation() == null ||
+                team.getAbbreviation().isEmpty() ||
+                team.getDisplayName() == null ||
+                team.getDisplayName().isEmpty()) {
+            throw new ServiceException();
+        }
+
         League league = getLeague(leagueId);
+        if (league == null) {
+            league = createLeague(leagueId);
+        }
         Season season = league.getSeason();
         season.addTeam(team);
         return season.getTeams().size();
@@ -36,6 +64,7 @@ public class TeamServiceStub implements TeamService {
 
     /**
      * Returns the teams in a given league
+     *
      * @param leagueId the league id
      * @return list of teams in the league
      */

@@ -11,6 +11,13 @@ import java.util.List;
  */
 public interface TeamService {
 
+    /**
+     * Returns the teams in a given league
+     *
+     * @param leagueId the league id
+     * @return list of teams in the league
+     */
     int addTeam(int leagueId, Team team) throws ServiceException;
+
     List<Team> getTeams(int leagueId);
 }
