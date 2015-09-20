@@ -7,16 +7,7 @@ import is.ru.honn.rufan.domain.Player;
  *
  * @author arnarkari
  */
-public class PlayerService {
+public interface PlayerService {
 
-    public PlayerService() {
-    }
 
-    public void addPlayer(Player player1) {
-
-    }
-
-    public Player Getplayer(int i) {
-        return null;
-    }
 }
