@@ -44,18 +44,64 @@ public class TestPlayerService extends TestCase {
         team.setVenue(venue);
     }
 
+    //region Test add player required properties
     @Test
-    public void AddPlayer_FirstNameRequired() {
+    public void AddPlayer_FirstNameRequired_FirstNameEmpty() {
 
         // Arrange:
-        Player player1 = new Player("", "Milner", team.getTeamId());
+        Player player = new Player("", "Milner", team.getTeamId());
 
         // Act:
-        service.addPlayer(player1);
+        try {
+            service.addPlayer(player);
+        } catch (IllegalArgumentException e) {
+            // Assert:
+            assertSame(IllegalArgumentException.class, e.getClass());
+        }
+    }
+    @Test
+    public void AddPlayer_FirstNameRequired_FirstNameIsNULL() {
 
-        // Assert:
-        Player playerNew = service.Getplayer(1);
-        assertSame(player1, playerNew);
+        // Arrange:
+        Player player = new Player(null, "Milner", team.getTeamId());
+
+        // Act:
+        try {
+            service.addPlayer(player);
+        } catch (IllegalArgumentException e) {
+            // Assert:
+            assertSame(IllegalArgumentException.class, e.getClass());
+        }
     }
 
+    @Test
+    public void AddPlayer_LastNameRequired() {
+
+        // Arrange:
+        Player player = new Player("James", "", team.getTeamId());
+
+        // Act:
+        try {
+            service.addPlayer(player);
+        } catch (IllegalArgumentException e) {
+            // Assert:
+            assertSame(IllegalArgumentException.class, e.getClass());
+        }
+    }
+
+    @Test
+    public void AddPlayer_TeamIdRequired() {
+
+        // Arrange:
+        Player player = new Player("James", "Milner", null);
+
+        // Act:
+        try {
+            service.addPlayer(player);
+        } catch (IllegalArgumentException e) {
+            // Assert:
+            assertSame(IllegalArgumentException.class, e.getClass());
+        }
+    }
+    //endregion
 }

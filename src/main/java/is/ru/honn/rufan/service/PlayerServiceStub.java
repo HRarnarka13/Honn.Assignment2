@@ -23,7 +23,17 @@ public class PlayerServiceStub implements PlayerService {
         return null; // TODO: throw exception
     }
 
-    public int addPlayer(Player player1) {
-        return 0;
+    public int addPlayer(Player newPlayer) throws IllegalArgumentException {
+
+        if (newPlayer.getFirstName() == null ||
+                newPlayer.getFirstName().equals("") ||
+                newPlayer.getLastName() == null ||
+                newPlayer.getLastName().equals("")) {
+            throw new IllegalArgumentException();
+        }
+
+        newPlayer.setPlayerId(players.size());
+        players.add(newPlayer);
+        return players.size() - 1;
     }
 }
