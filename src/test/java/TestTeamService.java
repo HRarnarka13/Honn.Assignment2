@@ -118,7 +118,6 @@ public class TestTeamService extends TestCase {
 
         // Act :
         List<Team> teams = teamService.getTeams(league.getLeagueId());
-
         // Assert :
         Team invalidTeam = new Team(999, "Invalid", "ERR", "ERROR", venue);
         assertFalse(teams.contains(invalidTeam));

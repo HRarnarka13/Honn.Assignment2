@@ -78,6 +78,12 @@ public class TestPlayerService extends TestCase {
         playerService.addPlayer(player);
     }
 
+    /**
+     * Test if the TeamID is 0
+     * NOTE TO TEACHER: We did not find a way to test this function because int can not be NULL.
+     *                  We solved this by having players with ID 0  not allowed.
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddPlayer_TeamIdRequired() throws ServiceException {
         // Arrange:
