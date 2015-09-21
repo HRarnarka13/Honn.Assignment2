@@ -1,6 +1,7 @@
 package is.ru.honn.rufan.service;
 
 import is.ru.honn.rufan.domain.Player;
+import is.ru.honn.rufan.domain.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,23 @@ import java.util.List;
 public class PlayerServiceStub implements PlayerService {
 
     private List<Player> players = new ArrayList<Player>();
+    private TeamServiceStub teamService;
+
+    // region override methods
+    /**
+     * Returns the player with the provided id
+     *
+     * @param playerId the id of the player
+     * @return the player
+     */
+    public Player getPlayer(int playerId) {
+        for (Player player : players) {
+            if (player.getPlayerId() == playerId) {
+                return player; // Found the player
+            }
+        }
+        return null; // return null because player was not found
+    }
 
     /**
      * Get a list of players in a specific team
@@ -30,25 +48,23 @@ public class PlayerServiceStub implements PlayerService {
         return teamPlayers;
     }
 
-    public List<Player> getPlayersByAbbreviation(String abbreviation) {
-        return null;
-    }
-
     /**
-     * Returns the player with the provided id
+     * Gets all the players from a given team
      *
-     * @param playerId the id of the player
-     * @return the player
+     * @param teamAbbreviation The abbrevation for the team
+     * @return list of players in the team
      */
-    public Player getPlayer(int playerId) {
+    public List<Player> getPlayersByTeam(String teamAbbreviation) {
+        Team team = teamService.getTeamByAbbreviation(teamAbbreviation); // get the team
+
+        List<Player> teamPlayers = new ArrayList<Player>();
         for (Player player : players) {
-            if (player.getPlayerId() == playerId) {
-                return player;
+            if (player.getTeamId() == team.getTeamId()) {
+                teamPlayers.add(player);
             }
         }
-        return null; // TODO: throw exception
+        return teamPlayers;
     }
-
 
     /**
      * Added a player to the list and returns the players id
@@ -76,4 +92,6 @@ public class PlayerServiceStub implements PlayerService {
         players.add(newPlayer);
         return players.size();
     }
+    // endregion
+
 }
