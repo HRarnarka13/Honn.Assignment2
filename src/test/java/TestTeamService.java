@@ -112,18 +112,18 @@ public class TestTeamService extends TestCase {
         // Assert :
         assertSame(newTeam, team);
     }
-//    @Test
-//    public void GetTeam_TeamDoesNotExist() throws ServiceException {
-//        // Arrange:
-//        Team team = new Team(1, "Liverpool", "LFC", "Liverpool FC", venue);
-//        // Act :
-//        teamService.addTeam(league.getLeagueId(), team);
-//
-//        List<Team> teams = teamService.getTeams(league.getLeagueId());
-//        Team invalidTeam = teams.get(1);
-//        // Assert :
-//        assertNull(invalidTeam);
-//    }
+   // @Test
+    public void GetTeam_TeamDoesNotExist() throws ServiceException {
+        // Arrange:
+        Team team = new Team(1, "Liverpool", "LFC", "Liverpool FC", venue);
+        // Act :
+        teamService.addTeam(league.getLeagueId(), team);
+
+        List<Team> teams = teamService.getTeams(league.getLeagueId());
+        Team invalidTeam = teams.get(1);
+        // Assert :
+        assertFalse(teams.contains(invalidTeam));
+    }
     //endregion
 
 }

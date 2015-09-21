@@ -41,7 +41,13 @@ public class TeamServiceStub implements TeamService {
         return league;
     }
 
-
+    /**
+     * Adds a team to a given league
+     * @param leagueId the league id
+     * @param team The team to be added
+     * @return The index of the newly added team in a list of teams
+     * @throws ServiceException
+     */
     public int addTeam(int leagueId, Team team) throws ServiceException {
         // Validate team
         if (team.getTeamId() == 0 ||
@@ -51,10 +57,20 @@ public class TeamServiceStub implements TeamService {
                 team.getDisplayName().isEmpty()) {
             throw new ServiceException();
         }
-
+        // if the League does not exist we create a new league
         League league = getLeague(leagueId);
         if (league == null) {
             league = createLeague(leagueId);
+        }
+        // check if the team is already in the league
+        List<Team> teamsInLeague = getTeams(leagueId);
+        int newTeamId = team.getTeamId();
+        for(Team t : teamsInLeague){
+            if(t.getTeamId() == newTeamId){
+                // If a team with this ID already exists within the league.
+                // Maybe we should do this for all leagues if TeamID should be unique.
+                throw new ServiceException();
+            }
         }
         Season season = league.getSeason();
         season.addTeam(team);
