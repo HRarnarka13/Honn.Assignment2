@@ -1,13 +1,5 @@
 package is.ru.honn.rufan.reader;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 /**
  * Created by arnarkari on 21/09/15.
  *
@@ -19,18 +11,7 @@ public class AbstractReader implements Reader {
     String URI;
 
     public Object read() throws ReaderException {
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader(URI));
-            JSONObject jsonObject = (JSONObject) obj;
-            return this.parse(jsonObject.toJSONString());
-        } catch (ParseException e) {
-            throw new ReaderException();
-        } catch (FileNotFoundException e) {
-            throw new ReaderException();
-        } catch (IOException e) {
-            throw new ReaderException();
-        }
+        return new ClientRequest().getRequest(URI);
     }
 
     public Object parse(String content) {

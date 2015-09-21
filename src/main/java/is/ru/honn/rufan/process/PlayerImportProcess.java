@@ -1,7 +1,6 @@
 package is.ru.honn.rufan.process;
 
 import is.ru.honn.rufan.reader.ReadHandler;
-import is.ru.honn.rufan.reader.Reader;
 import is.ruframework.process.*;
 import org.springframework.context.MessageSource;
 
@@ -45,8 +44,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
      * @param object
      */
     public void read(int count, Object object) {
-        String fileContent = (String) object;
-
 
     }
 }
