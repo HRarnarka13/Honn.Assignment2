@@ -19,5 +19,11 @@ public interface TeamService {
      */
     int addTeam(int leagueId, Team team) throws ServiceException;
 
+    /**
+     * Gets all the teams in the given league
+     *
+     * @param leagueId the id of the league
+     * @return a list of teams in the league
+     */
     List<Team> getTeams(int leagueId);
 }
