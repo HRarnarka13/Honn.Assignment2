@@ -64,4 +64,66 @@ public class TestTeamService extends TestCase {
         List<Team> t = teamService.getTeams(league.getLeagueId());
         assertTrue(t.contains(team));
     }
+
+    //region Testing required fields
+    @Test(expected = ServiceException.class)
+    public void AddTeam_TeamNameRequired_TeamNameIsEmpty() throws ServiceException {
+        // Arrange:
+        Team team = new Team(1, "Liverpool", "LFC", "", venue);
+        // Act :
+        teamService.addTeam(league.getLeagueId(), team);
+    }
+
+    @Test(expected = ServiceException.class)
+    public void AddTeam_TeamNameRequired_TeamNameIsNull() throws ServiceException {
+        // Arrange:
+        Team team = new Team(1, "Liverpool", "LFC", null, venue);
+        // Act :
+        teamService.addTeam(league.getLeagueId(), team);
+    }
+
+    @Test(expected = ServiceException.class)
+    public void AddTeam_AbbreviationRequired_AbbreviationIsEmpty() throws ServiceException {
+        // Arrange:
+        Team team = new Team(1, "Liverpool", "", "Liverpool FC", venue);
+        // Act :
+        teamService.addTeam(league.getLeagueId(), team);
+    }
+
+    @Test(expected = ServiceException.class)
+    public void AddTeam_AbbreviationRequired_AbbreviationIsNull() throws ServiceException {
+        // Arrange:
+        Team team = new Team(1, "Liverpool", null, "Liverpool FC", venue);
+        // Act :
+        teamService.addTeam(league.getLeagueId(), team);
+    }
+    //endregion
+
+    //region Testing getting teams
+    @Test
+    public void GetValidTeam() throws ServiceException {
+        // Arrange:
+        Team team = new Team(1, "Liverpool", "LFC", "Liverpool FC", venue);
+        // Act :
+        teamService.addTeam(league.getLeagueId(), team);
+
+        List<Team> teams = teamService.getTeams(league.getLeagueId());
+        Team newTeam = teams.get(0);
+        // Assert :
+        assertSame(newTeam, team);
+    }
+//    @Test
+//    public void GetTeam_TeamDoesNotExist() throws ServiceException {
+//        // Arrange:
+//        Team team = new Team(1, "Liverpool", "LFC", "Liverpool FC", venue);
+//        // Act :
+//        teamService.addTeam(league.getLeagueId(), team);
+//
+//        List<Team> teams = teamService.getTeams(league.getLeagueId());
+//        Team invalidTeam = teams.get(1);
+//        // Assert :
+//        assertNull(invalidTeam);
+//    }
+    //endregion
+
 }
