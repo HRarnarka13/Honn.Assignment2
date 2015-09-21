@@ -64,10 +64,9 @@ public class TeamServiceStub implements TeamService {
         }
         // check if the team is already in the league
         List<Team> teamsInLeague = getTeams(leagueId);
-        int newTeamId = team.getTeamId();
         for(Team t : teamsInLeague){
-            if(t.getTeamId() == newTeamId){
-                // If a team with this ID already exists within the league.
+            if(t.getTeamId() == team.getTeamId() || t.getAbbreviation() == team.getAbbreviation()){
+                // If a team with this ID or abb already exists within the league.
                 // Maybe we should do this for all leagues if TeamID should be unique.
                 throw new ServiceException();
             }
