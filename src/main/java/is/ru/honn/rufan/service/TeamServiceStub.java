@@ -15,6 +15,7 @@ import java.util.List;
 public class TeamServiceStub implements TeamService {
 
     private List<League> leagues = new ArrayList<League>();
+    private List<Team> teams = new ArrayList<Team>();
 
     private League getLeague(int leagueId) {
         for (League league : leagues) {
@@ -62,9 +63,9 @@ public class TeamServiceStub implements TeamService {
         if (league == null) {
             league = createLeague(leagueId);
         }
-        // check if the team is already in the league
-        List<Team> teamsInLeague = getTeams(leagueId);
-        for(Team t : teamsInLeague){
+
+        // Check if the team is already in the league
+        for(Team t : teams){
             if(t.getTeamId() == team.getTeamId() || t.getAbbreviation() == team.getAbbreviation()){
                 // If a team with this ID or abb already exists within the league.
                 // Maybe we should do this for all leagues if TeamID should be unique.
@@ -73,7 +74,8 @@ public class TeamServiceStub implements TeamService {
         }
         Season season = league.getSeason();
         season.addTeam(team);
-        return season.getTeams().size();
+        teams.add(team);
+        return teams.size();
     }
 
 
