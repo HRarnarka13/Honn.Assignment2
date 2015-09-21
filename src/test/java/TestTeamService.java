@@ -57,7 +57,7 @@ public class TestTeamService extends TestCase {
     @Test
     public void AddTeam_ValidTeam() throws ServiceException {
         // Arrange:
-        Team team = new Team(1, "Liverpool", "LFC", "Liverpool FC", venue);
+        Team team = new Team(2, "Everton", "EVE", "Everton", venue);
         // Act :
         teamService.addTeam(league.getLeagueId(), team);
         // Assert :
@@ -120,7 +120,6 @@ public class TestTeamService extends TestCase {
         teamService.addTeam(league.getLeagueId(), team);
 
         List<Team> teams = teamService.getTeams(league.getLeagueId());
-        Team invalidTeam = teams.get(1);
         // Assert :
         assertFalse(teams.contains(invalidTeam));
     }
