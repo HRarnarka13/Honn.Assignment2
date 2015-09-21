@@ -53,7 +53,6 @@ public class TestTeamService extends TestCase {
         league.setDisplayName("English Premier League");
     }
 
-
     @Test
     public void AddTeam_ValidTeam() throws ServiceException {
         // Arrange:
@@ -77,7 +76,7 @@ public class TestTeamService extends TestCase {
     @Test(expected = ServiceException.class)
     public void AddTeam_TeamNameRequired_TeamNameIsNull() throws ServiceException {
         // Arrange:
-        Team team = new Team(1, "Liverpool", "LFC", null, venue);
+        Team team = new Team(3, "Stoke City", "STK", null, venue);
         // Act :
         teamService.addTeam(league.getLeagueId(), team);
     }
@@ -103,24 +102,24 @@ public class TestTeamService extends TestCase {
     @Test
     public void GetValidTeam() throws ServiceException {
         // Arrange:
-        Team team = new Team(1, "Liverpool", "LFC", "Liverpool FC", venue);
+        Team expectedTeam = new Team(1, "Liverpool", "LFC", "Liverpool FC", venue);
+        teamService.addTeam(league.getLeagueId(), expectedTeam);
         // Act :
-        teamService.addTeam(league.getLeagueId(), team);
-
         List<Team> teams = teamService.getTeams(league.getLeagueId());
-        Team newTeam = teams.get(0);
         // Assert :
-        assertSame(newTeam, team);
+        Team actualTeam = teams.get(0);
+        assertSame(expectedTeam, actualTeam);
     }
    // @Test
     public void GetTeam_TeamDoesNotExist() throws ServiceException {
         // Arrange:
         Team team = new Team(1, "Liverpool", "LFC", "Liverpool FC", venue);
-        // Act :
         teamService.addTeam(league.getLeagueId(), team);
 
+        // Act :
         List<Team> teams = teamService.getTeams(league.getLeagueId());
         // Assert :
+        Team invalidTeam = new Team(999, "Invalid", "ERR", "ERROR", venue);
         assertFalse(teams.contains(invalidTeam));
     }
     //endregion
