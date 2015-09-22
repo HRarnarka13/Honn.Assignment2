@@ -1,6 +1,11 @@
 package is.ru.honn.rufan.reader;
 
 import javax.ws.rs.ProcessingException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by arnarkari on 21/09/15.
@@ -56,4 +61,24 @@ public abstract class AbstractReader implements Reader {
     public void setReadHandler(ReadHandler readHandler) {
         this.readHandler = readHandler;
     }
+
+
+    /**
+     * Format a date for correct display.
+     * Format example 2015-08-21T16:19:30.6967613Z
+     * @param strDate
+     * @return The date correctly formatted.
+     */
+    public Date convertDate(String strDate) {
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd'T'HH:mm:ss", Locale.ENGLISH);
+        Date date = null;
+
+        try {
+            date = format.parse(strDate);
+        } catch (ParseException e) {
+            System.out.println("FAIL");
+        }
+        return date;
+    }
+
 }

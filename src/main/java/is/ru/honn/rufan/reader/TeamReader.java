@@ -86,25 +86,4 @@ public class TeamReader extends AbstractReader {
 
         return league;
     }
-
-
-    /**
-     * Format a date for correct display.
-     * Format example 2015-08-21T16:19:30.6967613Z
-     * @param strDate
-     * @return The date correctly formatted.
-     */
-
-    protected Date convertDate(String strDate) {
-        DateFormat format = new SimpleDateFormat("yyyy.MM.dd'T'HH:mm:ss", Locale.ENGLISH);
-        Date date = null;
-
-        try {
-            date = format.parse(strDate);
-        } catch (ParseException e) {
-            System.out.println("FAIL");
-        }
-        return date;
-    }
-
 }
