@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- *
+ * This class builds a string from an online source or a file.
  */
 public class ClientRequest {
     public ClientRequest() {}
