@@ -2,19 +2,38 @@ package is.ru.honn.rufan.service;
 
 import is.ru.honn.rufan.domain.Player;
 import is.ru.honn.rufan.domain.Team;
+import javafx.beans.InvalidationListener;
 
+import javax.security.auth.Subject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by arnarkari on 20/09/15.
  *
  * @author arnarkari
  */
-public class PlayerServiceStub implements PlayerService {
+public class PlayerServiceStub implements PlayerService  {
 
     private List<Player> players = new ArrayList<Player>();
     private TeamServiceStub teamService;
+    private List<Observer> observers = new ArrayList<Observer>();
+
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            // TODO notify the observers...
+        }
+    }
 
     // region override methods
     /**
@@ -90,6 +109,8 @@ public class PlayerServiceStub implements PlayerService {
             newPlayer.setPlayerId(players.size() + 1);
         }
         players.add(newPlayer);
+
+        notifyObservers();
         return players.size();
     }
     // endregion

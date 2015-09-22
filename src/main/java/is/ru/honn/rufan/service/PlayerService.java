@@ -2,6 +2,7 @@ package is.ru.honn.rufan.service;
 
 import is.ru.honn.rufan.domain.Player;
 
+import javax.security.auth.Subject;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author arnarkari
  */
-public interface PlayerService {
+public interface PlayerService extends is.ru.honn.rufan.observer.Subject {
 
     Player getPlayer(int playerId);
 
@@ -18,4 +19,6 @@ public interface PlayerService {
     List<Player> getPlayersByTeam(String teamAbbreviation);
 
     int addPlayer(Player player) throws ServiceException;
+
+
 }
