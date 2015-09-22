@@ -4,6 +4,7 @@ import javax.ws.rs.ProcessingException;
 
 /**
  * Created by arnarkari on 21/09/15.
+ * A abstract reader class that implements the reader interface and all reader classes extend.
  *
  * @author arnarkari
  */
@@ -13,9 +14,11 @@ public abstract class AbstractReader implements Reader {
     String URI;
 
     /**
+     * Read the file (provided URI) and calls parse that parses the content of the file
      *
-     * @return
-     * @throws ReaderException
+     * @return The objects that the parse() function returns
+     * @throws ReaderException if the readerHandler is not set or if there is a exception processing the request for
+     * the file
      */
     public Object read() throws ReaderException {
         if (readHandler == null) {
