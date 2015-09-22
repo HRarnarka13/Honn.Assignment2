@@ -26,6 +26,9 @@ import java.util.logging.Logger;
 
 /**
  * Created by arnarkari on 21/09/15.
+ * This class controls the process when the players are read from the file provided in the process.xml file
+ * and send to the service provided in the service.xml file and notifies all the observers that are subscribed
+ * to the process.
  *
  * @author arnarkari
  */
@@ -39,18 +42,28 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     private MessageSource messageSource;
     private Locale locale;
 
+
+    /**
+     * The constructor
+     */
     public PlayerImportProcess() {
+        // region Get the local settings
         ApplicationContext ctx = new FileSystemXmlApplicationContext("classpath:message.xml");
         messageSource = (MessageSource) ctx.getBean("messageSource");
         String languageTag = (String) ctx.getBean("islLocal");
         this.locale = Locale.forLanguageTag(languageTag);
+        // endregion
     }
 
+    /**
+     * This function is called before the process starts
+     */
     @Override
     public void beforeProcess() {
         super.beforeProcess();
         log.info(messageSource.getMessage("processbefore", new Object[]{this.getClass().getName()}, this.locale));
 
+        // region Get the Service
         ServiceFactory serviceFactory = new ServiceFactory();
 
         try {
@@ -58,17 +71,22 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         } catch (FactoryException e) {
             log.info(messageSource.getMessage("playerserviceexception", new Object[]{ e.getClass().getName() }, this.locale));
         }
+        // endregion
 
+        // region Get the reader
         ReaderFactory readerFactory = new ReaderFactory();
 
         try {
             reader = readerFactory.getReader("playerReader");
         } catch (FactoryException e) {
-            log.info(messageSource.getMessage("playerreaderexception", new Object[]{ e.getClass().getName() }, this.locale));
+            log.info(messageSource.getMessage("playerreaderexception", new Object[]{e.getClass().getName()}, this.locale));
         }
+        // endregion
+
         reader.setReadHandler(this);
         reader.setURI(getProcessContext().getImportURL());
 
+        // region Get the observer
         ObserverFactory observerFactory = new ObserverFactory();
         Observer observer = null;
         try {
@@ -76,19 +94,28 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         } catch (FactoryException e) {
             log.info(messageSource.getMessage("playerobserverexception", new Object[]{ e.getClass().getName() }, this.locale));
         }
+        // endregion
+
         addObserver(observer);
     }
 
+
+    /**
+     * This function is called when the process starts.
+     */
     @Override
     public void startProcess() {
         log.info(messageSource.getMessage("processstart", new Object[]{this.getClass().getName()}, this.locale));
         try {
-            reader.read();
+            reader.read(); // Start reading and parsing the file
         } catch (ReaderException e) {
             log.info(messageSource.getMessage("processreaderror", new Object[]{getProcessContext().getImportURL()}, this.locale));
         }
     }
 
+    /**
+     * This function is called after the process
+     */
     @Override
     public void afterProcess() {
         super.afterProcess();
@@ -96,35 +123,53 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     }
 
     /**
-     * Gets the content from the file and calls parse()
+     * This function is called from the provided reader in the reader.xml inside the parse() function after
+     * reading one block (player).
      *
-     * @param count
-     * @param object
+     * @param count The number of the block (player)
+     * @param object The object that the reader gets from the file, e.g. a single player
      */
     public void read(int count, Object object) {
         try {
             Player newPlayer = (Player) object;
-            service.addPlayer(newPlayer);
-            notifyObservers(newPlayer);
+            service.addPlayer(newPlayer); // add the player to the service
+            notifyObservers(newPlayer); // notify the observers about the new player
         } catch (ServiceException e) {
             log.info(messageSource.getMessage("addingplayererror", new Object[]{ e.getClass().getName() }, this.locale));
         }
     }
 
+    /**
+     * Add a new observer to the subscriber list (observers lists)
+     * @param observer the new observers
+     */
     public void addObserver(Observer observer) {
         observers.add(observer);
     }
 
+    /**
+     * Remove a observer from hte subscriber list (observers list)
+     * @param observer The observer to be removed
+     */
     public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
+    /**
+     * This functions goes through all the observers subscribed to this process and sends the
+     * the new object (player) to observer by calling their update function.
+     * @param object The object to passed to the observers e.g. a single player
+     */
     private void notifyObservers(Object object) {
         for (Observer observer : observers) {
             observer.update(object);
         }
     }
 
+    /**
+     * Set the service used by this class
+     * @param playerService a type of PlayerService
+     */
     public void setService(PlayerService playerService) {
         this.service = playerService;
     }
