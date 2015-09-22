@@ -38,7 +38,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
 
     private PlayerService service;
     private Reader reader;
-    private List<Observer> observers = new ArrayList<Observer>();
     private MessageSource messageSource;
     private Locale locale;
 
@@ -96,7 +95,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         }
         // endregion
 
-        addObserver(observer);
+        service.addObserver(observer);
     }
 
 
@@ -133,36 +132,8 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         try {
             Player newPlayer = (Player) object;
             service.addPlayer(newPlayer); // add the player to the service
-            notifyObservers(newPlayer); // notify the observers about the new player
         } catch (ServiceException e) {
             log.info(messageSource.getMessage("addingplayererror", new Object[]{ e.getClass().getName() }, this.locale));
-        }
-    }
-
-    /**
-     * Add a new observer to the subscriber list (observers lists)
-     * @param observer the new observers
-     */
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    /**
-     * Remove a observer from hte subscriber list (observers list)
-     * @param observer The observer to be removed
-     */
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    /**
-     * This functions goes through all the observers subscribed to this process and sends the
-     * the new object (player) to observer by calling their update function.
-     * @param object The object to passed to the observers e.g. a single player
-     */
-    private void notifyObservers(Object object) {
-        for (Observer observer : observers) {
-            observer.update(object);
         }
     }
 

@@ -10,16 +10,14 @@ import java.util.Observer;
 
 /**
  * Created by arnarkari on 20/09/15.
- * This class implements the functionality for
- * the playerService interface.
+ *
  * @author arnarkari
  */
-public class PlayerServiceStub implements PlayerService {
+public class PlayerServiceStub extends AbstractPlayerService {
 
     private List<Player> players = new ArrayList<Player>();
     private TeamServiceStub teamService = new TeamServiceStub();
     private List<Observer> observers = new ArrayList<Observer>();
-
 
     // region override methods
     /**
@@ -72,7 +70,8 @@ public class PlayerServiceStub implements PlayerService {
     }
 
     /**
-     * Adds a player to the list and returns the players id
+     * Added a player to the list and returns the players id
+     *
      * @param newPlayer the new player
      * @return the id for the new player
      * @throws ServiceException if the newPlayer is invalid an exception is thrown
@@ -80,20 +79,21 @@ public class PlayerServiceStub implements PlayerService {
     public int addPlayer(Player newPlayer) throws ServiceException {
 
         // Validate player
-        if (newPlayer.getLastName() == null ||
+        if (newPlayer.getFirstName() == null ||
+                newPlayer.getFirstName().equals("") ||
+                newPlayer.getLastName() == null ||
                 newPlayer.getLastName().equals("") ||
                 newPlayer.getTeamId() == 0) {
             throw new ServiceException();
         }
-        if(newPlayer.getFirstName() == null){
-            newPlayer.setFirstName("");
-        }
+
         if (players.isEmpty()) {
             newPlayer.setPlayerId(1);
         } else {
             newPlayer.setPlayerId(players.size() + 1);
         }
         players.add(newPlayer);
+        notifyObservers(newPlayer);
         return players.size();
     }
     // endregion

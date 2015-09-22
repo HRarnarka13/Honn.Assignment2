@@ -1,6 +1,7 @@
 package is.ru.honn.rufan.service;
 
 import is.ru.honn.rufan.domain.Player;
+import is.ru.honn.rufan.observer.Subject;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author arnarkari
  */
-public interface PlayerService {
+public interface PlayerService extends Subject {
     /**
      * Get a player with a give ID
      * @param playerId The ID of a player
@@ -39,6 +40,4 @@ public interface PlayerService {
      * @throws ServiceException
      */
     int addPlayer(Player player) throws ServiceException;
-
-
 }

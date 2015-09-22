@@ -21,14 +21,15 @@ public class TestObserver extends TestCase {
     public void Test() throws Exception {
         // Arrange :
         PlayerImportProcess playerImportProcess =  new PlayerImportProcess();
-        playerImportProcess.setService(new PlayerServiceStub());
+        PlayerServiceStub playerServiceStub = new PlayerServiceStub();
+        playerImportProcess.setService(playerServiceStub);
         final Player player = new Player("Messi", "Lionel", 1);
 
-        playerImportProcess.addObserver(new Observer() {
-            public void update(Object object) {
-                assertEquals(player, object);
-            }
-        });
+        playerServiceStub.addObserver(new Observer() {
+             public void update(Object object) {
+                 assertEquals(player, object);
+             }
+         });
         // Act :
         playerImportProcess.read(1, player);
     }
