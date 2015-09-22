@@ -72,5 +72,6 @@ public class Country {
     public void setAbbreviation(String abbreviation) {
         Abbreviation = abbreviation;
     }
+
     //endregion
 }
