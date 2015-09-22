@@ -17,12 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestObserver extends TestCase {
 
-    /**
-     * Add a new observer to the playerImportProcess.
-     * Assert that the newest player sent to the observer
-     * is the same player the observer receives
-     * @throws Exception
-     */
     @Test
     public void Test() throws Exception {
         // Arrange :
@@ -31,8 +25,8 @@ public class TestObserver extends TestCase {
         final Player player = new Player("Messi", "Lionel", 1);
 
         playerImportProcess.addObserver(new Observer() {
-            public void update(Object arg) {
-                assertEquals(player, arg);
+            public void update(Object object) {
+                assertEquals(player, object);
             }
         });
         // Act :
