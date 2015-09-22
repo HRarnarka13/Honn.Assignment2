@@ -76,14 +76,14 @@ public class PlayerServiceStub implements PlayerService {
     public int addPlayer(Player newPlayer) throws ServiceException {
 
         // Validate player
-        if (newPlayer.getFirstName() == null ||
-                newPlayer.getFirstName().equals("") ||
-                newPlayer.getLastName() == null ||
+        if (newPlayer.getLastName() == null ||
                 newPlayer.getLastName().equals("") ||
                 newPlayer.getTeamId() == 0) {
             throw new ServiceException();
         }
-
+        if(newPlayer.getFirstName() == null){
+            newPlayer.setFirstName("");
+        }
         if (players.isEmpty()) {
             newPlayer.setPlayerId(1);
         } else {
