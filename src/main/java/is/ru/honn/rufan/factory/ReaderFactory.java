@@ -1,6 +1,9 @@
 package is.ru.honn.rufan.factory;
 
 import is.ru.honn.rufan.reader.AbstractReader;
+import is.ru.honn.rufan.reader.Reader;
+import is.ru.honn.rufan.reader.ReaderException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -13,14 +16,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ReaderFactory {
 
+    private static final String READER_CONTEXT = "reader.xml";
+
     public ReaderFactory() {
     }
 
-    private static final String READER_CONTEXT = "reader.xml";
-
-    public static Object getReader(String readerType) {
+    public static Reader getReader(String readerType) {
         ApplicationContext context = new ClassPathXmlApplicationContext(READER_CONTEXT);
-        AbstractReader reader = (AbstractReader) context.getBean(readerType);
-        return reader;
+        try {
+            Reader reader = (Reader) context.getBean(readerType);
+            return reader;
+        } catch (NoSuchBeanDefinitionException e) {
+            throw new FactoryException("No such bean found", e);
+        }
     }
 }

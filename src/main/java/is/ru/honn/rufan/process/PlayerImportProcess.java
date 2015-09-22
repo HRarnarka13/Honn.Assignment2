@@ -1,6 +1,7 @@
 package is.ru.honn.rufan.process;
 
 import is.ru.honn.rufan.domain.Player;
+import is.ru.honn.rufan.factory.FactoryException;
 import is.ru.honn.rufan.factory.ObserverFactory;
 import is.ru.honn.rufan.factory.ReaderFactory;
 import is.ru.honn.rufan.observer.Observer;
@@ -26,7 +27,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
 
     Logger log = Logger.getLogger(PlayerImportProcess.class.getName());
 
-    private MessageSource messageSource;
     private PlayerService service;
     private Reader reader;
     private List<Observer> observers;
@@ -34,10 +34,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     public PlayerImportProcess() {
     }
 
-    @Override
-    public void setProcessContext(RuProcessContext processContext) {
-        super.setProcessContext(processContext);
-    }
 
     @Override
     public void beforeProcess() {
@@ -45,7 +41,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         service = new PlayerServiceStub();
 
         ReaderFactory readerFactory = new ReaderFactory();
-        reader = (Reader) readerFactory.getReader("playerReader");
+        reader = readerFactory.getReader("playerReader");
         reader.setReadHandler(this);
         reader.setURI(getProcessContext().getImportURL());
 
@@ -58,8 +54,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     @Override
     public void startProcess() {
         try {
-            String content = (String) reader.read();
-            reader.parse(content);
+            reader.read();
         } catch (ReaderException e) {
             log.info("Error reading: " + e.getMessage());
         }

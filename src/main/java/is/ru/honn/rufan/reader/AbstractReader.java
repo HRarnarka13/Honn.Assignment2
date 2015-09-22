@@ -1,22 +1,31 @@
 package is.ru.honn.rufan.reader;
 
+import javax.ws.rs.ProcessingException;
+
 /**
  * Created by arnarkari on 21/09/15.
  *
  * @author arnarkari
  */
-public class AbstractReader implements Reader {
+public abstract class AbstractReader implements Reader {
 
     ReadHandler readHandler;
     String URI;
 
     public Object read() throws ReaderException {
-        return new ClientRequest().getRequest(URI);
+        if (readHandler == null) {
+            throw new ReaderException();
+        }
+
+        try {
+            String content = new ClientRequest().getRequest(URI);
+            return parse(content);
+        } catch (ProcessingException e) {
+            throw new ReaderException();
+        }
     }
 
-    public Object parse(String content) {
-        return null;
-    }
+    public abstract Object parse(String content);
 
     public void setURI(String URI) {
         this.URI = URI;
