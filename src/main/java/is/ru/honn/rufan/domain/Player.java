@@ -30,6 +30,21 @@ public class Player {
         this.teamId = teamId;
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", birthDate=" + birthDate +
+                ", nationality=" + nationality +
+                ", teamId=" + teamId +
+                ", positions=" + positions +
+                '}';
+    }
+
     //region Getters and setters
 
     public String getFirstName() {

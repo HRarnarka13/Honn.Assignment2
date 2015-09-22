@@ -43,6 +43,7 @@ public class TeamServiceStub implements TeamService {
             }
         }
 
+
         // if the League does not exist we create a new league
         League league = getLeague(leagueId);
         if (league == null) {
@@ -60,6 +61,7 @@ public class TeamServiceStub implements TeamService {
         season.addTeam(team);
         return season.getTeams().size();
     }
+
 
     /**
      * Returns the teams in a given league
@@ -82,7 +84,7 @@ public class TeamServiceStub implements TeamService {
                 return league;
             }
         }
-        return null; // TODO : throw not found error
+        return null;
     }
 
     private League createLeague(int leagueId) {

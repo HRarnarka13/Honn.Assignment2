@@ -13,6 +13,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ReaderFactory {
 
+    public ReaderFactory() {
+    }
+
     private static final String READER_CONTEXT = "reader.xml";
 
     public static Object getReader(String readerType) {
