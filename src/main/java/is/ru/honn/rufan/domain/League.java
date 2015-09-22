@@ -12,7 +12,7 @@ public class League
   protected Season season;
 
     /**
-     * Gets the ID of the league
+     * Get the ID of the league
      * @return The ID of the league
      */
     public int getLeagueId()
@@ -31,7 +31,7 @@ public class League
     }
 
     /**
-     * Gets the name of the league
+     * Get the name of the league
      * @return The name of the league
      */
 
@@ -50,7 +50,7 @@ public class League
     }
 
     /**
-     * Gets the abbreviation of the league
+     * Get the abbreviation of the league
      * @return The abbreviation of the league
      */
 
@@ -90,7 +90,7 @@ public class League
     }
 
     /**
-     * Gets the season of the league
+     * Get the season of the league
      * @return the season of the league
      */
 

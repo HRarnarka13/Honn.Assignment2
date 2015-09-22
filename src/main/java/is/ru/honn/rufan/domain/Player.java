@@ -29,7 +29,7 @@ public class Player {
         this.lastName = lastName;
         this.teamId = teamId;
     }
-    
+
     @Override
     public String toString() {
         return "Player{" +
@@ -48,7 +48,7 @@ public class Player {
     //region Getters and setters
 
     /**
-     * Gets the first name of the player
+     * Get the first name of the player
      * @return The first name of the players
      */
     public String getFirstName() {
@@ -64,7 +64,7 @@ public class Player {
     }
 
     /**
-     * Gets the last name of the player
+     * Get the last name of the player
      * @return The last name of the player
      */
 
@@ -121,7 +121,7 @@ public class Player {
     }
 
     /**
-     * Gets the nationality of the player
+     * Get the nationality of the player
      * @return The nationality of the player
      */
     public Country getNationality() {
@@ -152,6 +152,10 @@ public class Player {
         this.birthDate = birthDate;
     }
 
+    /**
+     * Adds a position to the player
+     * @param position The position to be added
+     */
     public void addPosition(Position position) {
         this.positions.add(position);
     }

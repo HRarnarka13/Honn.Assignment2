@@ -33,7 +33,7 @@ public class Country {
     }
 
     /**
-     * Gets the id of the country
+     * Get the id of the country
      * @return The ID of the country
      */
 
@@ -42,7 +42,7 @@ public class Country {
     }
 
     /**
-     * Gets the name of the country
+     * Get the name of the country
      * @return The name of the country
      */
     public String getName() {
@@ -58,7 +58,7 @@ public class Country {
     }
 
     /**
-     * Gets the abbreviation of a country
+     * Get the abbreviation of a country
      * @return The abbreviation of a country
      */
     public String getAbbreviation() {
