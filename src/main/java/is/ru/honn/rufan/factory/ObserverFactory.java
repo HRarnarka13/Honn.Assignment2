@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by arnarkari on 22/09/15.
+ * A factory that gets and returns the observer provided in the observer.xml file
  *
  * @author arnarkari
  */
@@ -16,17 +17,17 @@ public class ObserverFactory {
     private static final String OBSERVER_CONTEXT = "observer.xml";
 
     /**
-     *
-     * @param observerType
-     * @return
+     * Gets the observer specified in hte observer.xml file
+     * @param observerType the observer type, example: "playerObserver"
+     * @return an instance of a observer
+     * @throws FactoryException if there is no observer with the specified observerType in the file observer.xml
      */
-    public static Object getObserver(String observerType) throws FactoryException {
+    public static Observer getObserver(String observerType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(OBSERVER_CONTEXT);
         try {
-            Observer observer = (Observer) context.getBean(observerType);
-            return observer;
+            return (Observer) context.getBean(observerType);
         } catch (NoSuchBeanDefinitionException e) {
-            throw new FactoryException("No such bean found", e);
+            throw new FactoryException();
         }
     }
 }
