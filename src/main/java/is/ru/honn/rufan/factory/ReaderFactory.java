@@ -21,7 +21,7 @@ public class ReaderFactory {
     public ReaderFactory() {
     }
 
-    public static Reader getReader(String readerType) {
+    public static Reader getReader(String readerType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(READER_CONTEXT);
         try {
             Reader reader = (Reader) context.getBean(readerType);

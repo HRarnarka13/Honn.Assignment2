@@ -19,7 +19,7 @@ public class ServiceFactory {
     public ServiceFactory() {
     }
 
-    public static PlayerService getPlayerService(String serviceType) {
+    public static PlayerService getPlayerService(String serviceType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(SERVICE_CONTEXT);
         try {
             return (PlayerService) context.getBean(serviceType);
@@ -28,7 +28,7 @@ public class ServiceFactory {
         }
     }
 
-    public static TeamService getTeamService(String serviceType) {
+    public static TeamService getTeamService(String serviceType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(SERVICE_CONTEXT);
         try {
             return (TeamService) context.getBean(serviceType);

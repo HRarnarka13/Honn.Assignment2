@@ -35,7 +35,7 @@ public class TestReader extends TestCase {
 
     // region Tests for ReaderFactory
     @Test
-    public void ReaderFactory_ReadsXMLFileCorrectly_WithPlayerReader() {
+    public void ReaderFactory_ReadsXMLFileCorrectly_WithPlayerReader() throws FactoryException {
         // Arrange:
         final String readerType = "playerReader";
         // Act:
@@ -45,7 +45,7 @@ public class TestReader extends TestCase {
     }
 
     @Test
-    public void ReaderFactory_ReadsXMLFileCorrectly_WithTeamReader() {
+    public void ReaderFactory_ReadsXMLFileCorrectly_WithTeamReader() throws FactoryException {
         // Arrange:
         final String readerType = "teamReader";
         // Act:
@@ -55,7 +55,7 @@ public class TestReader extends TestCase {
     }
 
     @Test(expected = FactoryException.class)
-    public void ReaderFactory_ReadsXMLFileCorrectly_WithException() {
+    public void ReaderFactory_ReadsXMLFileCorrectly_WithException() throws FactoryException {
         // Arrange:
         final String readerType = "prumpuReader";
         // Act:
@@ -100,7 +100,7 @@ public class TestReader extends TestCase {
     }
 
     @Test
-    public void AbstractReader_ReadsFileCorrectly() {
+    public void AbstractReader_ReadsFileCorrectly() throws FactoryException {
         // Arrange:
         String readerType = "playerReader";
         Reader reader = readerFactory.getReader(readerType);

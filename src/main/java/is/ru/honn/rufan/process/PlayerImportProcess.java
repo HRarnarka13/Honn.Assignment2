@@ -40,42 +40,59 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     private Locale locale;
 
     public PlayerImportProcess() {
+        ApplicationContext ctx = new FileSystemXmlApplicationContext("classpath:message.xml");
+        messageSource = (MessageSource) ctx.getBean("messageSource");
+        String languageTag = (String) ctx.getBean("islLocal");
+        this.locale = Locale.forLanguageTag(languageTag);
     }
 
     @Override
     public void beforeProcess() {
         super.beforeProcess();
-
-        ApplicationContext ctx = new FileSystemXmlApplicationContext("classpath:message.xml");
-        messageSource = (MessageSource) ctx.getBean("messageSource");
-        this.locale = Locale.forLanguageTag("is");
         log.info(messageSource.getMessage("processbefore", new Object[]{ this.getClass().getName() }, this.locale));
 
         ServiceFactory serviceFactory = new ServiceFactory();
-        setService(serviceFactory.getPlayerService("playerService"));
+
+        try {
+            setService(serviceFactory.getPlayerService("playerService"));
+        } catch (FactoryException e) {
+            log.info(messageSource.getMessage("playerserviceexception", new Object[]{ e.getClass().getName() }, this.locale));
+        }
 
         ReaderFactory readerFactory = new ReaderFactory();
-        reader = readerFactory.getReader("playerReader");
+
+        try {
+            reader = readerFactory.getReader("playerReader");
+        } catch (FactoryException e) {
+            log.info(messageSource.getMessage("playerreaderexception", new Object[]{ e.getClass().getName() }, this.locale));
+        }
         reader.setReadHandler(this);
         reader.setURI(getProcessContext().getImportURL());
 
         ObserverFactory observerFactory = new ObserverFactory();
-        Observer observer = (Observer) observerFactory.getObserver("playerObserver");
+        Observer observer = null;
+        try {
+            observer = (Observer) observerFactory.getObserver("playerObserver");
+        } catch (FactoryException e) {
+            log.info(messageSource.getMessage("playerobserverexception", new Object[]{ e.getClass().getName() }, this.locale));
+        }
         addObserver(observer);
     }
 
     @Override
     public void startProcess() {
+        log.info(messageSource.getMessage("processstart", new Object[]{this.getClass().getName()}, this.locale));
         try {
             reader.read();
         } catch (ReaderException e) {
-            log.info("Error reading: " + e.getMessage());
+            log.info(messageSource.getMessage("processreaderror", new Object[]{getProcessContext().getImportURL()}, this.locale));
         }
     }
 
     @Override
     public void afterProcess() {
         super.afterProcess();
+        log.info(messageSource.getMessage("processstartdone", new Object[]{ this.getClass().getName() }, this.locale));
     }
 
     /**
@@ -90,7 +107,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
             service.addPlayer(newPlayer);
             notifyObservers(newPlayer);
         } catch (ServiceException e) {
-            log.info("Error adding player: " + e.getMessage());
+            log.info(messageSource.getMessage("addingplayererror", new Object[]{ e.getClass().getName() }, this.locale));
         }
     }
 

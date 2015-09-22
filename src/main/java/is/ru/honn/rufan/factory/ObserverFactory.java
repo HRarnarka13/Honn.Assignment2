@@ -15,7 +15,7 @@ public class ObserverFactory {
 
     private static final String OBSERVER_CONTEXT = "observer.xml";
 
-    public static Object getObserver(String observerType) {
+    public static Object getObserver(String observerType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(OBSERVER_CONTEXT);
         try {
             Observer observer = (Observer) context.getBean(observerType);
