@@ -41,7 +41,7 @@ public class TestReader extends TestCase {
      * the string used for the GET method is "playerReader"
      */
     @Test
-    public void ReaderFactory_ReadsXMLFileCorrectly_WithPlayerReader() {
+    public void ReaderFactory_ReadsXMLFileCorrectly_WithPlayerReader() throws FactoryException {
         // Arrange:
         final String readerType = "playerReader";
         // Act:
@@ -56,7 +56,7 @@ public class TestReader extends TestCase {
      * the string used for the GET method is "teamReader"
      */
     @Test
-    public void ReaderFactory_ReadsXMLFileCorrectly_WithTeamReader() {
+    public void ReaderFactory_ReadsXMLFileCorrectly_WithTeamReader() throws FactoryException {
         // Arrange:
         final String readerType = "teamReader";
         // Act:
@@ -71,7 +71,7 @@ public class TestReader extends TestCase {
      * when readerType is invalid
      */
     @Test(expected = FactoryException.class)
-    public void ReaderFactory_ReadsXMLFileCorrectly_WithException() {
+    public void ReaderFactory_ReadsXMLFileCorrectly_WithException() throws FactoryException {
         // Arrange:
         final String readerType = "invalidReader";
         // Act:
@@ -138,7 +138,7 @@ public class TestReader extends TestCase {
      * amount of players from the given URI
      */
     @Test
-    public void AbstractReader_ReadsFileCorrectly() {
+    public void AbstractReader_ReadsFileCorrectly() throws FactoryException {
         // Arrange:
         String readerType = "playerReader";
         Reader reader = readerFactory.getReader(readerType);

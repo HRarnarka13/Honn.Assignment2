@@ -24,7 +24,7 @@ public class ServiceFactory {
      * @param serviceType
      * @return
      */
-    public static PlayerService getPlayerService(String serviceType) {
+    public static PlayerService getPlayerService(String serviceType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(SERVICE_CONTEXT);
         try {
             return (PlayerService) context.getBean(serviceType);
@@ -38,7 +38,7 @@ public class ServiceFactory {
      * @param serviceType
      * @return
      */
-    public static TeamService getTeamService(String serviceType) {
+    public static TeamService getTeamService(String serviceType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(SERVICE_CONTEXT);
         try {
             return (TeamService) context.getBean(serviceType);

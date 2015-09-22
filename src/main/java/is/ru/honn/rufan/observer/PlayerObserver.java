@@ -20,7 +20,6 @@ public class PlayerObserver implements Observer {
      */
     public void update(Object arg) {
         Player player = (Player) arg;
-        // log.info(player.toString());
-        System.out.println(player.toString());
+        log.info(player.toString());
     }
 }

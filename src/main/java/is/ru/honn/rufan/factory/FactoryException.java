@@ -5,7 +5,7 @@ package is.ru.honn.rufan.factory;
  *
  * @author arnarkari
  */
-public class FactoryException extends RuntimeException {
+public class FactoryException extends Exception {
 
     public FactoryException() {
         super();

@@ -20,7 +20,7 @@ public class ObserverFactory {
      * @param observerType
      * @return
      */
-    public static Object getObserver(String observerType) {
+    public static Object getObserver(String observerType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(OBSERVER_CONTEXT);
         try {
             Observer observer = (Observer) context.getBean(observerType);
