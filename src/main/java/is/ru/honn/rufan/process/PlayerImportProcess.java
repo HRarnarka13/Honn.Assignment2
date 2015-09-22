@@ -13,10 +13,15 @@ import is.ru.honn.rufan.service.PlayerService;
 import is.ru.honn.rufan.service.PlayerServiceStub;
 import is.ru.honn.rufan.service.ServiceException;
 import is.ruframework.process.*;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import java.nio.file.FileStore;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
@@ -31,6 +36,8 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     private PlayerService service;
     private Reader reader;
     private List<Observer> observers = new ArrayList<Observer>();
+    private MessageSource messageSource;
+    private Locale locale;
 
     public PlayerImportProcess() {
     }
@@ -38,6 +45,12 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     @Override
     public void beforeProcess() {
         super.beforeProcess();
+
+        ApplicationContext ctx = new FileSystemXmlApplicationContext("classpath:message.xml");
+        messageSource = (MessageSource) ctx.getBean("messageSource");
+        this.locale = Locale.forLanguageTag("is");
+        log.info(messageSource.getMessage("processbefore", new Object[]{ this.getClass().getName() }, this.locale));
+
         ServiceFactory serviceFactory = new ServiceFactory();
         setService(serviceFactory.getPlayerService("playerService"));
 
