@@ -10,7 +10,8 @@ import java.util.Observer;
 
 /**
  * Created by arnarkari on 20/09/15.
- *
+ * This class implements the functionality for
+ * the playerService interface.
  * @author arnarkari
  */
 public class PlayerServiceStub implements PlayerService {
@@ -71,8 +72,7 @@ public class PlayerServiceStub implements PlayerService {
     }
 
     /**
-     * Added a player to the list and returns the players id
-     *
+     * Adds a player to the list and returns the players id
      * @param newPlayer the new player
      * @return the id for the new player
      * @throws ServiceException if the newPlayer is invalid an exception is thrown

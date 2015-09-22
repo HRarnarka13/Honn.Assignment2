@@ -31,6 +31,11 @@ public abstract class AbstractReader implements Reader {
         this.URI = URI;
     }
 
+    /**
+     * Sets the readHandler for the reader
+     * e.g.  playerReader or teamReader
+     * @param readHandler
+     */
     public void setReadHandler(ReadHandler readHandler) {
         this.readHandler = readHandler;
     }

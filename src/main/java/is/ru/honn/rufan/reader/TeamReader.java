@@ -16,7 +16,13 @@ import java.util.Date;
 import java.util.Locale;
 
 public class TeamReader extends AbstractReader {
-
+    /**
+     * Parse a JSON formatted string to make a new League
+     * containing information about seasons, teams and players
+     *
+     * @param content The JSON string
+     * @return A new League object.
+     */
     public Object parse(String content) {
         String tmp;
 
@@ -82,7 +88,13 @@ public class TeamReader extends AbstractReader {
     }
 
 
-    // Format example 2015-08-21T16:19:30.6967613Z
+    /**
+     * Format a date for correct display.
+     * Format example 2015-08-21T16:19:30.6967613Z
+     * @param strDate
+     * @return The date correctly formatted.
+     */
+
     protected Date convertDate(String strDate) {
         DateFormat format = new SimpleDateFormat("yyyy.MM.dd'T'HH:mm:ss", Locale.ENGLISH);
         Date date = null;

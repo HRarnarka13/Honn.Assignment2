@@ -10,13 +10,34 @@ import java.util.List;
  * @author arnarkari
  */
 public interface PlayerService {
-
+    /**
+     * Get a player with a give ID
+     * @param playerId The ID of a player
+     * @return The player with the given ID
+     */
     Player getPlayer(int playerId);
+
+    /**
+     * Get a List of players with a give teamID
+     * @param teamId The ID of the team
+     * @return A list of players with the given teamID
+     */
 
     List<Player> getPlayers(int teamId);
 
+    /**
+     * Get a list of players in a team with a give Abbreviation
+     * @param teamAbbreviation the Abbreviation of a team
+     * @return A list of players in the team
+     */
     List<Player> getPlayersByTeam(String teamAbbreviation);
 
+    /**
+     * Adds a player to the list and returns the players id
+     * @param player The player to add
+     * @return The ID of the newly added player
+     * @throws ServiceException
+     */
     int addPlayer(Player player) throws ServiceException;
 
 

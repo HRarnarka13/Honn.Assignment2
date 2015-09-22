@@ -17,6 +17,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestObserver extends TestCase {
 
+    /**
+     * Add a new observer to the playerImportProcess.
+     * Assert that the newest player sent to the observer
+     * is the same player the observer receives
+     * @throws Exception
+     */
     @Test
     public void Test() throws Exception {
         // Arrange :

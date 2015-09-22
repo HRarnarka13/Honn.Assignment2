@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  * Created by arnarkari on 20/09/15.
- *
+ * This class contains unit tests for the TeamServiceStub class
  * @author arnarkari
  */
 
@@ -31,7 +31,9 @@ public class TestTeamService extends TestCase {
     @Autowired
     private TeamService teamService;
 
-    
+    /**
+     * This sets up a Season, Venue and League used in the tests
+     */
     @Before
     public void setup() {
         // Create season
@@ -53,6 +55,12 @@ public class TestTeamService extends TestCase {
         league.setDisplayName("English Premier League");
     }
 
+    /**
+     * Test adding a valid team to a League
+     * and then getting a team with the same teamID and leagueID.
+     * Assert that this is the same team.
+     * @throws ServiceException
+     */
     @Test
     public void AddTeam_ValidTeam() throws ServiceException {
         // Arrange:
@@ -65,6 +73,12 @@ public class TestTeamService extends TestCase {
     }
 
     //region Testing required fields
+
+    /**
+     * Add a Team with a empty TeamName
+     * Expect a ServiceException to be thrown.
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddTeam_TeamNameRequired_TeamNameIsEmpty() throws ServiceException {
         // Arrange:
@@ -73,6 +87,11 @@ public class TestTeamService extends TestCase {
         teamService.addTeam(league.getLeagueId(), team);
     }
 
+    /**
+     * Add a Team with TeamName = null
+     * Expect a ServiceException to be thrown
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddTeam_TeamNameRequired_TeamNameIsNull() throws ServiceException {
         // Arrange:
@@ -81,6 +100,11 @@ public class TestTeamService extends TestCase {
         teamService.addTeam(league.getLeagueId(), team);
     }
 
+    /**
+     * Add a Team with a empty Abbreviation
+     * Expect a ServiceException to be thrown
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddTeam_AbbreviationRequired_AbbreviationIsEmpty() throws ServiceException {
         // Arrange:
@@ -88,7 +112,11 @@ public class TestTeamService extends TestCase {
         // Act :
         teamService.addTeam(league.getLeagueId(), team);
     }
-
+    /**
+     * Add a Team with Abbreviation = null
+     * Expect a ServiceException to be thrown
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddTeam_AbbreviationRequired_AbbreviationIsNull() throws ServiceException {
         // Arrange:
@@ -99,6 +127,13 @@ public class TestTeamService extends TestCase {
     //endregion
 
     //region Testing getting teams
+
+    /**
+     * Add a valid team to a empty League.
+     * Get the team from the League
+     * Assert that the teams are the same.
+     * @throws ServiceException
+     */
     @Test
     public void GetValidTeam() throws ServiceException {
         // Arrange:

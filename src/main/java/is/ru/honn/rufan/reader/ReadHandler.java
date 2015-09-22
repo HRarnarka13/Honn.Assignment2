@@ -6,5 +6,10 @@ package is.ru.honn.rufan.reader;
  * @author arnarkari
  */
 public interface ReadHandler {
+    /**
+     *
+     * @param count The current number of objects read.
+     * @param object An object to be read.
+     */
     public void read(int count, Object object);
 }

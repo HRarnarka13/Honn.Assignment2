@@ -22,6 +22,12 @@ public class ClientRequest {
         return result;
     }
 
+    /**
+     * DEAD CODE
+     * @param fileName
+     * @return
+     * @throws ReaderException
+     */
     public String getFileContent(String fileName) throws ReaderException {
         StringBuilder content = new StringBuilder();
         try {

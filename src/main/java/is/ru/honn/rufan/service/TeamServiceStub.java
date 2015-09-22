@@ -9,7 +9,8 @@ import java.util.List;
 
 /**
  * Created by arnarkari on 20/09/15.
- *
+ * This class implements the functionality for
+ * the TeamService interface.
  * @author arnarkari
  */
 public class TeamServiceStub implements TeamService {
@@ -78,6 +79,13 @@ public class TeamServiceStub implements TeamService {
     // endregion
 
     // region helper functions
+
+    /**
+     * A helper function to get a League with a
+     * give leagueID
+     * @param leagueId The ID of the league
+     * @return League or null if no league found.
+     */
     private League getLeague(int leagueId) {
         for (League league : leagues) {
             if (league.getLeagueId() == leagueId) {
@@ -87,6 +95,12 @@ public class TeamServiceStub implements TeamService {
         return null;
     }
 
+    /**
+     * A helper function that makes a new League
+     * with temporary variable values.
+     * @param leagueId The ID of the league
+     * @return the new league
+     */
     private League createLeague(int leagueId) {
         Season season = new Season();
         season.setIsActive(false);
@@ -106,7 +120,7 @@ public class TeamServiceStub implements TeamService {
     /**
      * Get team by the abbreviation
      *
-     * @param teamAbbreviation the abbrevation for the team
+     * @param teamAbbreviation the abbreviation for the team
      * @return a single team
      */
     public Team getTeamByAbbreviation(String teamAbbreviation) {
