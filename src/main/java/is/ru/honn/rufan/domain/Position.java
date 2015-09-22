@@ -22,33 +22,72 @@ public class Position {
         this.sequence = sequence;
     }
 
+    /**
+     * Gets the ID of the position
+     * @return The id of the position
+     */
     public int getPositionId() {
         return positionId;
     }
+
+    /**
+     * Sets the positions ID
+     * @param positionId The positions ID
+     */
 
     public void setPositionId(int positionId) {
         this.positionId = positionId;
     }
 
+    /**
+     * Get the name of the position
+     * @return The name of the position
+     */
+
     public String getName() {
         return name;
     }
+
+    /**
+     * Set the name of the position
+     * @param name The name of the position
+     */
 
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get the abbreviation of the position
+     * @return The abbreviation of the position
+     */
+
     public String getAbbreviation() {
         return abbreviation;
     }
+
+    /**
+     * Sets the abbreviation of the position
+     * @param abbreviation The abbreviation of the position
+     */
 
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 
+    /**
+     * Get the sequence of the position
+     * @return The sequence of the position
+     */
+
     public int getSequence() {
         return sequence;
     }
+
+    /**
+     * Sets the sequence of the position
+     * @param sequence The sequence of the position
+     */
 
     public void setSequence(int sequence) {
         this.sequence = sequence;

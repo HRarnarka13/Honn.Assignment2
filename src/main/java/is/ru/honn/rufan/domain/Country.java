@@ -14,26 +14,61 @@ public class Country {
     }
 
     //region Getters and setters
+
+    /**
+     * Sets the id for a country
+     * @param countryId The id of the country
+     */
     public void setCountryId(int countryId) {
         this.countryId = countryId;
     }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "countryId=" + countryId +
+                ", name='" + name + '\'' +
+                ", Abbreviation='" + Abbreviation + '\'' +
+                '}';
+    }
+
+    /**
+     * Get the id of the country
+     * @return The ID of the country
+     */
 
     public int getCountryId() {
         return countryId;
     }
 
+    /**
+     * Get the name of the country
+     * @return The name of the country
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of a country
+     * @param name The name of the country
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get the abbreviation of a country
+     * @return The abbreviation of a country
+     */
     public String getAbbreviation() {
         return Abbreviation;
     }
 
+    /**
+     * Sets the abbreviatoin of a country
+     * @param abbreviation The abbreviation of the country
+     */
     public void setAbbreviation(String abbreviation) {
         Abbreviation = abbreviation;
     }
