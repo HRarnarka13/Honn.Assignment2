@@ -1,41 +1,32 @@
 package is.ru.honn.rufan.domain;
 
-/**
- * A class containing necessary information about a Venue
- */
-public class Venue
-{
-  private int venueId;
-  private String name;
-  private String city;
 
-  public int getVenueId()
-  {
-    return venueId;
-  }
+public class Venue {
+    private int venueId;
+    private String name;
+    private String city;
 
-  public void setVenueId(int venueId)
-  {
-    this.venueId = venueId;
-  }
+    public int getVenueId() {
+        return venueId;
+    }
 
-  public String getName()
-  {
-    return name;
-  }
+    public void setVenueId(int venueId) {
+        this.venueId = venueId;
+    }
 
-  public void setName(String name)
-  {
-    this.name = name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public String getCity()
-  {
-    return city;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void setCity(String city)
-  {
-    this.city = city;
-  }
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }

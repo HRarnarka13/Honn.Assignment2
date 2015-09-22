@@ -9,11 +9,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by arnarkari on 21/09/15.
+ * A factory that gets and returns the Reader provided in the reader.xml
  *
  * @author arnarkari
  */
-
-
 public class ReaderFactory {
 
     private static final String READER_CONTEXT = "reader.xml";
@@ -22,9 +21,11 @@ public class ReaderFactory {
     }
 
     /**
+     * Gets the reader specified in the reader.xml
      *
-     * @param readerType
+     * @param readerType the reader type, example: "playerReader"
      * @return
+     * @throws FactoryException
      */
     public static Reader getReader(String readerType) throws FactoryException {
         ApplicationContext context = new ClassPathXmlApplicationContext(READER_CONTEXT);
@@ -32,7 +33,7 @@ public class ReaderFactory {
             Reader reader = (Reader) context.getBean(readerType);
             return reader;
         } catch (NoSuchBeanDefinitionException e) {
-            throw new FactoryException("No such bean found", e);
+            throw new FactoryException();
         }
     }
 }
