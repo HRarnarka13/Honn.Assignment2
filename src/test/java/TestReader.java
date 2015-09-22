@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 /**
  * Created by arnarkari on 20/09/15.
- *
+ * This class contains unit tests for the Readers
  * @author arnarkari
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,6 +34,12 @@ public class TestReader extends TestCase {
     private ReaderFactory readerFactory;
 
     // region Tests for ReaderFactory
+
+    /**
+     * Assert that the readerFactory returns
+     * a reader of the playerReader class when
+     * the string used for the GET method is "playerReader"
+     */
     @Test
     public void ReaderFactory_ReadsXMLFileCorrectly_WithPlayerReader() {
         // Arrange:
@@ -44,20 +50,30 @@ public class TestReader extends TestCase {
         assertSame(PlayerReader.class, reader.getClass());
     }
 
+    /**
+     * Assert that the readerFactory returns
+     * a reader of the teamReader class when
+     * the string used for the GET method is "teamReader"
+     */
     @Test
     public void ReaderFactory_ReadsXMLFileCorrectly_WithTeamReader() {
         // Arrange:
         final String readerType = "teamReader";
         // Act:
         Reader reader = readerFactory.getReader(readerType);
+
         // Assert:
         assertSame(TeamReader.class, reader.getClass());
     }
 
+    /**
+     * Assert that an exception is thrown
+     * when readerType is invalid
+     */
     @Test(expected = FactoryException.class)
     public void ReaderFactory_ReadsXMLFileCorrectly_WithException() {
         // Arrange:
-        final String readerType = "prumpuReader";
+        final String readerType = "invalidReader";
         // Act:
         readerFactory.getReader(readerType);
         // Assert: Expect exception
@@ -65,6 +81,13 @@ public class TestReader extends TestCase {
     // endregion
 
     // region Test for AbstractReader
+
+    /**
+     * Assert that an exception is thrown
+     * when the URI received by the reader
+     * is invalid.
+     * @throws Exception
+     */
     @Test(expected = ReaderException.class)
      public void AbstractReader_WrongURI() throws Exception {
         // Arrange:
@@ -76,6 +99,12 @@ public class TestReader extends TestCase {
         // Assert: Expect exception
     }
 
+    /**
+     * Assert that an exception is thrown
+     * when the URI received by the reader
+     * is null.
+     * @throws Exception
+     */
     @Test(expected = ReaderException.class)
     public void AbstractReader_URIIsNull() throws Exception {
         // Arrange:
@@ -87,6 +116,11 @@ public class TestReader extends TestCase {
         // Assert: Expect exception
     }
 
+    /**
+     * Assert that an error is thrown
+     * when the handler for the reader is not set
+     * @throws Exception
+     */
     @Test(expected = ReaderException.class)
     public void AbstractReader_HandlerNotSet() throws Exception {
         // Arrange:
@@ -99,6 +133,10 @@ public class TestReader extends TestCase {
         // Assert: Expect exception
     }
 
+    /**
+     * Assert that the reader reads the correct
+     * amount of players from the given URI
+     */
     @Test
     public void AbstractReader_ReadsFileCorrectly() {
         // Arrange:
@@ -118,6 +156,7 @@ public class TestReader extends TestCase {
         }
 
         // Assert:
+        // 582 is the correct amount of players from the URI "http://olafurandri.com/honn/players.json"
         assertEquals(582, players.size());
     }
     // endregion

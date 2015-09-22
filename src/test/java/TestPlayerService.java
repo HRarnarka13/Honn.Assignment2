@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  * Created by arnarkari on 20/09/15.
- *
+ *  This class contains test cases for the playerServiceStub
  * @author arnarkari
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,6 +29,10 @@ public class TestPlayerService extends TestCase {
     @Autowired
     private PlayerService playerService;
 
+    /**
+     * Setup a new Venue and Team used
+     * for the tests
+     */
     @Before
     public void setup() {
         // Create venue
@@ -44,6 +48,12 @@ public class TestPlayerService extends TestCase {
     }
 
     //region Test add player required properties
+
+    /**
+     * Assert that an exception is thrown
+     * when adding a player with an empty firstName
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddPlayer_FirstNameRequired_FirstNameEmpty() throws ServiceException {
         // Arrange:
@@ -52,6 +62,11 @@ public class TestPlayerService extends TestCase {
         playerService.addPlayer(player);
     }
 
+    /**
+     * Assert that an exception is thrown
+     * when adding a player where firstName is null
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddPlayer_FirstNameRequired_FirstNameIsNULL() throws ServiceException {
 
@@ -61,7 +76,11 @@ public class TestPlayerService extends TestCase {
         // Act:
         playerService.addPlayer(player);
     }
-
+    /**
+     * Assert that an exception is thrown
+     * when adding a player with an empty lastName
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddPlayer_LastNameRequired_LastNameIsEmpty() throws ServiceException {
         // Arrange:
@@ -69,7 +88,11 @@ public class TestPlayerService extends TestCase {
         // Act:
         playerService.addPlayer(player);
     }
-
+    /**
+     * Assert that an exception is thrown
+     * when adding a player where lastName is null
+     * @throws ServiceException
+     */
     @Test(expected = ServiceException.class)
     public void AddPlayer_LastNameRequired_LastNameIsNull() throws ServiceException {
         // Arrange:
@@ -94,6 +117,13 @@ public class TestPlayerService extends TestCase {
     //endregion
 
     // region Test add player that is ok
+
+    /**
+     * Add 2 different valid players.
+     * Assert that the correct player is returned
+     * from the playerService
+     * @throws ServiceException
+     */
     public void AddPlayer_AddingValidPlayer() throws ServiceException {
         // Arrange:
         Player player1 = new Player("James", "Milner", team.getTeamId());
@@ -109,6 +139,11 @@ public class TestPlayerService extends TestCase {
     // endregion
 
     // region Test get player that dose not exist
+
+    /**
+     * Assert that getting a non existing player
+     * from the service returns null.
+     */
     public void GetPlayer_GetNonExistingPlayer() {
         // Arrange :
         int nonExistingPlayerId = 999;

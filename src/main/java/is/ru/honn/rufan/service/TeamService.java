@@ -7,13 +7,13 @@ import java.util.List;
 /**
  * Created by arnarkari on 20/09/15.
  *
+ *
  * @author arnarkari
  */
 public interface TeamService {
 
     /**
-     * Returns the teams in a given league
-     *
+     * Adds a Team to a League with the correct LeagueID
      * @param leagueId the league id
      * @return list of teams in the league
      */
