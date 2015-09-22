@@ -1,6 +1,8 @@
 package is.ru.honn.rufan.domain;
 
-
+/**
+ * A class containing necessary information about a Team
+ */
 public class Team {
 
     private int teamId;

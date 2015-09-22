@@ -6,5 +6,9 @@ package is.ru.honn.rufan.observer;
  * @author arnarkari
  */
 public interface Observer {
+    /**
+     *
+     * @param arg
+     */
     public void update(Object arg);
 }

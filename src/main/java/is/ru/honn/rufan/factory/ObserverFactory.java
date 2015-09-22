@@ -15,6 +15,11 @@ public class ObserverFactory {
 
     private static final String OBSERVER_CONTEXT = "observer.xml";
 
+    /**
+     *
+     * @param observerType
+     * @return
+     */
     public static Object getObserver(String observerType) {
         ApplicationContext context = new ClassPathXmlApplicationContext(OBSERVER_CONTEXT);
         try {

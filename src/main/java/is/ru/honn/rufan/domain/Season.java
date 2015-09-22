@@ -3,6 +3,9 @@ package is.ru.honn.rufan.domain;
 
 import java.util.ArrayList;
 
+/**
+ * A class containing necessary information about a Season
+ */
 public class Season
 {
   private int season;

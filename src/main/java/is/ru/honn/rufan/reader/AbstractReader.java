@@ -12,6 +12,11 @@ public abstract class AbstractReader implements Reader {
     ReadHandler readHandler;
     String URI;
 
+    /**
+     *
+     * @return
+     * @throws ReaderException
+     */
     public Object read() throws ReaderException {
         if (readHandler == null) {
             throw new ReaderException();
@@ -25,15 +30,24 @@ public abstract class AbstractReader implements Reader {
         }
     }
 
+    /**
+     * Parse a string to collect the information you need.
+     * Implemented in reader classes that extend this class.
+     * @param content A string to parse
+     * @return An object containing the information wanted.
+     */
     public abstract Object parse(String content);
 
+    /**
+     * Set the URI of the reader
+     * @param URI the given URI
+     */
     public void setURI(String URI) {
         this.URI = URI;
     }
 
     /**
      * Sets the readHandler for the reader
-     * e.g.  playerReader or teamReader
      * @param readHandler
      */
     public void setReadHandler(ReadHandler readHandler) {

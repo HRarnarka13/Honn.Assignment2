@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Created by arnarkari on 20/09/15.
- *
+ * A class containing necessary information about a Player
  * @author arnarkari
  */
 public class Player {

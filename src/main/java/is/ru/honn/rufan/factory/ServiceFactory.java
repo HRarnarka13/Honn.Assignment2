@@ -19,6 +19,11 @@ public class ServiceFactory {
     public ServiceFactory() {
     }
 
+    /**
+     *
+     * @param serviceType
+     * @return
+     */
     public static PlayerService getPlayerService(String serviceType) {
         ApplicationContext context = new ClassPathXmlApplicationContext(SERVICE_CONTEXT);
         try {
@@ -28,6 +33,11 @@ public class ServiceFactory {
         }
     }
 
+    /**
+     *
+     * @param serviceType
+     * @return
+     */
     public static TeamService getTeamService(String serviceType) {
         ApplicationContext context = new ClassPathXmlApplicationContext(SERVICE_CONTEXT);
         try {

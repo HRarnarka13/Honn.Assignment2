@@ -1,6 +1,8 @@
 package is.ru.honn.rufan.domain;
 
-
+/**
+ * A class containing necessary information about a Venue
+ */
 public class Venue
 {
   private int venueId;

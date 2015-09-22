@@ -21,6 +21,11 @@ public class ReaderFactory {
     public ReaderFactory() {
     }
 
+    /**
+     *
+     * @param readerType
+     * @return
+     */
     public static Reader getReader(String readerType) {
         ApplicationContext context = new ClassPathXmlApplicationContext(READER_CONTEXT);
         try {

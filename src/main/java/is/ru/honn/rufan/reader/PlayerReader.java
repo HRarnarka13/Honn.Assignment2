@@ -9,6 +9,12 @@ import java.util.*;
 
 public class PlayerReader extends AbstractReader {
 
+    /**
+     * Parse a JSON formatted string to make a new list of players
+     * storing their information.
+     * @param content JSON string
+     * @return A list of players
+     */
     public Object parse(String content) {
         // Root object
         JSONObject jsonObject = (JSONObject) JSONValue.parse(content);
@@ -69,6 +75,13 @@ public class PlayerReader extends AbstractReader {
         return players;
     }
 
+    /**
+     * Get the correct int value for a JSONObject
+     * e.g year, month or date.
+     * @param jParent
+     * @param name
+     * @return
+     */
     protected int getInt(JSONObject jParent, String name) {
         if (jParent == null) {
             return 0;
@@ -80,6 +93,13 @@ public class PlayerReader extends AbstractReader {
         return value.intValue();
     }
 
+    /**
+     * Make a new date from year, month, date int values
+     * @param year
+     * @param month
+     * @param date
+     * @return a Date object from the input
+     */
     protected Date newDate(int year, int month, int date) {
         Calendar cal = new GregorianCalendar();
         cal.set(year, month, date);

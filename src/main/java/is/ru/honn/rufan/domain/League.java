@@ -1,5 +1,8 @@
 package is.ru.honn.rufan.domain;
 
+/**
+ * A class containing necessary information about a League
+ */
 public class League
 {
   private int leagueId;

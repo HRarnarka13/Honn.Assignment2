@@ -8,10 +8,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ *
+ */
 public class ClientRequest {
-    public ClientRequest() {
-    }
-
+    public ClientRequest() {}
+    /**
+     * Builds a string from information from an online source
+     * @param url link to website containing text
+     * @return the content of the URL as a string
+     */
     public String getRequest(String url) {
         Client client = ClientBuilder.newClient();
         Response response = client.target(url).request().get();
@@ -23,9 +29,9 @@ public class ClientRequest {
     }
 
     /**
-     * DEAD CODE
-     * @param fileName
-     * @return
+     * Reads the content of a file into a string object
+     * @param fileName the name of the file to read
+     * @return A string object
      * @throws ReaderException
      */
     public String getFileContent(String fileName) throws ReaderException {

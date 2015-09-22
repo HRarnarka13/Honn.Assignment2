@@ -2,7 +2,7 @@ package is.ru.honn.rufan.domain;
 
 /**
  * Created by arnarkari on 20/09/15.
- *
+ * A class containing necessary information about a Country
  * @author arnarkari
  */
 public class Country {
