@@ -11,53 +11,101 @@ public class League
   private String displayName;
   protected Season season;
 
-  public int getLeagueId()
-  {
+    /**
+     * Gets the ID of the league
+     * @return The ID of the league
+     */
+    public int getLeagueId()
+    {
     return leagueId;
-  }
+    }
 
-  public void setLeagueId(int leagueId)
-  {
+    /**
+     * Sets the ID for a leauge
+     * @param leagueId The ID of the league
+     */
+
+    public void setLeagueId(int leagueId)
+    {
     this.leagueId = leagueId;
-  }
+    }
 
-  public String getName()
-  {
+    /**
+     * Gets the name of the league
+     * @return The name of the league
+     */
+
+    public String getName()
+    {
     return name;
-  }
+    }
 
-  public void setName(String name)
-  {
+    /**
+     * Sets the name of the league
+     * @param name The name of the league
+     */
+    public void setName(String name)
+    {
     this.name = name;
-  }
+    }
 
-  public String getAbbreviation()
-  {
+    /**
+     * Gets the abbreviation of the league
+     * @return The abbreviation of the league
+     */
+
+    public String getAbbreviation()
+    {
     return abbreviation;
-  }
+    }
 
-  public void setAbbreviation(String abbreviation)
-  {
+    /**
+     * Sets the abbreviation of the league
+     * @param abbreviation The abbreviation of the league
+     */
+
+    public void setAbbreviation(String abbreviation)
+    {
     this.abbreviation = abbreviation;
-  }
+    }
 
-  public String getDisplayName()
-  {
+    /**
+     * Get the display name for the league
+     * @return The display name for the league
+     */
+
+    public String getDisplayName()
+    {
     return displayName;
-  }
+    }
 
-  public void setDisplayName(String displayName)
-  {
+    /**
+     * Sets the display name for the league
+     * @param displayName The display name of the league
+     */
+
+    public void setDisplayName(String displayName)
+    {
     this.displayName = displayName;
-  }
+    }
 
-  public Season getSeason()
-  {
+    /**
+     * Gets the season of the league
+     * @return the season of the league
+     */
+
+    public Season getSeason()
+    {
     return season;
-  }
+    }
 
-  public void setSeason(Season season)
-  {
+    /**
+     * Sets the season of the league
+     * @param season The season of the league
+     */
+
+    public void setSeason(Season season)
+    {
     this.season = season;
-  }
+    }
 }
