@@ -1,5 +1,6 @@
-package is.ru.honn.rufan.reader;
+package is.ru.honn.rufan.factory;
 
+import is.ru.honn.rufan.reader.AbstractReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

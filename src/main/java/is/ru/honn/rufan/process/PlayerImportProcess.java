@@ -1,8 +1,13 @@
 package is.ru.honn.rufan.process;
 
+import is.ru.honn.rufan.domain.Player;
 import is.ru.honn.rufan.reader.ReadHandler;
+import is.ru.honn.rufan.service.PlayerService;
+import is.ru.honn.rufan.service.ServiceException;
 import is.ruframework.process.*;
 import org.springframework.context.MessageSource;
+
+import java.util.logging.Logger;
 
 /**
  * Created by arnarkari on 21/09/15.
@@ -11,8 +16,10 @@ import org.springframework.context.MessageSource;
  */
 public class PlayerImportProcess extends RuAbstractProcess implements ReadHandler {
 
-    private MessageSource messageSource;
+    Logger log = Logger.getLogger(PlayerImportProcess.class.getName());
 
+    private MessageSource messageSource;
+    private PlayerService service;
 
     public PlayerImportProcess() {
     }
@@ -44,6 +51,10 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
      * @param object
      */
     public void read(int count, Object object) {
-
+        try {
+            service.addPlayer((Player) object);
+        } catch (ServiceException e) {
+            log.info("Error adding player: " + e.getMessage());
+        }
     }
 }
