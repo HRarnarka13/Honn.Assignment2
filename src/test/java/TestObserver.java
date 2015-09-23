@@ -1,11 +1,14 @@
 import is.ru.honn.rufan.domain.Player;
 import is.ru.honn.rufan.observer.Observer;
 import is.ru.honn.rufan.process.PlayerImportProcess;
+import is.ru.honn.rufan.service.PlayerService;
 import is.ru.honn.rufan.service.PlayerServiceStub;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
@@ -15,22 +18,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author arnarkari
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:app-test-stub.xml")
 public class TestObserver extends TestCase {
 
+    @Autowired
+    private PlayerService playerService;
+
     @Test
-    public void Test() throws Exception {
-        // Arrange :
-        PlayerImportProcess playerImportProcess =  new PlayerImportProcess();
-        PlayerServiceStub playerServiceStub = new PlayerServiceStub();
-        playerImportProcess.setService(playerServiceStub);
+    public void TestObserver_ObservsersGetNotified() throws Exception {
         final Player player = new Player("Messi", "Lionel", 1);
 
-        playerServiceStub.addObserver(new Observer() {
-             public void update(Object object) {
-                 assertEquals(player, object);
-             }
-         });
+        Observer observer = new Observer() {
+            public void update(Object object) {
+                assertEquals(player, object);
+            }
+        };
+        playerService.addObserver(observer);
+
         // Act :
-        playerImportProcess.read(1, player);
+        playerService.addPlayer(player);
     }
 }
